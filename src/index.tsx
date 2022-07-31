@@ -1,4 +1,5 @@
 import './assets/css/global.css';
+import './styles/antd.less';
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
