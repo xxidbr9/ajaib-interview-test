@@ -21,3 +21,4 @@ jobs:
           test-script: yarn test --ci --json --coverage --testLocationInResults --outputFile=./coverage/report.json
           skip-step: all
           coverage-file: ./coverage/report.json
+          base-coverage-file: ./coverage/master/report.json
