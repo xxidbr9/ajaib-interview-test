@@ -4,7 +4,6 @@ on:
   pull_request:
     branches:
       - development
-      - master
 
 jobs:
   build:
@@ -23,5 +22,5 @@ jobs:
       - name: Comment Test Coverage 💬
         uses: ArtiomTr/jest-coverage-report-action@v2
         with:
-          # github-token: ${{ secrets.ACCESS_TOKEN }}
+          skip-step: all
           coverage-file: ./coverage/report.json
