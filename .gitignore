@@ -1,0 +1,12 @@
+node_modules
+dist
+stats.json
+.DS_Store
+package-lock.json
+
+# IDE
+.vscode
+
+# ENV
+# .env.development
+.env.production
