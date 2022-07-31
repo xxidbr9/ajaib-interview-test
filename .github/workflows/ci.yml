@@ -15,7 +15,9 @@ jobs:
           persist-credentials: false 
 
       - name: Run Jest tests 🧪
-        run: yarn test --coverage
+        run: |
+          yarn
+          yarn test --coverage
 
       - name: Comment Test Coverage 💬
         uses: AthleticNet/comment-test-coverage@1.1
