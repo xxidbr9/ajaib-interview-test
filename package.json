@@ -1,0 +1,10 @@
+{
+  "name": "ajaib-interview-test",
+  "version": "0.0.1",
+  "description": "Ajaib Interview Test for Senior Web Engineer",
+  "main": "index.js",
+  "repository": "https://github.com/xxidbr9/ajaib-interview-test.git",
+  "author": "Barnando Akbarto Hidayatullah <barnando13@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
