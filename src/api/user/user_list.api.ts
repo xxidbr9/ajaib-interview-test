@@ -1,4 +1,2 @@
-
-export const getUserList = (params: any) => {
-  // return request.get('/user/list', { params });
-}
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+export const getUserList = (params: any) => params;
