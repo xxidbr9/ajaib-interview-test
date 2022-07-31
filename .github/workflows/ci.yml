@@ -4,7 +4,6 @@ on:
   pull_request:
     branches:
       - development
-      - master
 
 jobs:
   build:
@@ -14,14 +13,8 @@ jobs:
         uses: actions/checkout@v3
         with:
           persist-credentials: false
-
-      - name: Install Run Jest tests 🧪
-        run: |
-          yarn
-          yarn test --ci --json --coverage --testLocationInResults --outputFile=./coverage/report.json
-          
+ 
       - name: Comment Test Coverage 💬
         uses: ArtiomTr/jest-coverage-report-action@v2
         with:
-          # github-token: ${{ secrets.ACCESS_TOKEN }}
-          coverage-file: ./coverage/report.json
+          package-manager: yarn
