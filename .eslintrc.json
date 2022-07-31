@@ -28,6 +28,10 @@
     "@typescript-eslint/ban-ts-ignore": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }],
     "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": ["**/*.test.ts", "**/*.test.tsx"] }
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -43,6 +47,14 @@
     "browser": true,
     "node": true
   },
+  "overrides": [
+    {
+      "files": ["**/*.test.ts", "**/*.test.tsx"],
+      "env": {
+        "jest": true
+      }
+    }
+  ],
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
