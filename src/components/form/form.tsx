@@ -12,15 +12,19 @@ const Form = () => {
   const [form] = AntdForm.useForm();
 
   const handleReset = () => {
-    console.log('hello');
+    form.resetFields();
   };
 
   return (
     <AntdForm form={form} layout="vertical">
-      <Input.Group size="default">
+      <Input.Group>
         <Row gutter={12}>
           <Col span={4}>
-            <AntdForm.Item label="Search" labelCol={{ className: 'label' }}>
+            <AntdForm.Item
+              name="search"
+              label="Search"
+              labelCol={{ className: 'label' }}
+            >
               <Input.Search
                 name="search"
                 placeholder="Search ..."
@@ -31,12 +35,17 @@ const Form = () => {
           </Col>
 
           <Col span={8}>
-            <AntdForm.Item label="Gender" labelCol={{ className: 'label' }}>
+            <AntdForm.Item
+              name="gender"
+              label="Gender"
+              labelCol={{ className: 'label' }}
+            >
               <Space>
                 <Select
                   style={{ width: '300px' }}
                   size="large"
                   defaultValue="all"
+                  allowClear
                 >
                   {optionValues.map((value) => (
                     <Select.Option
