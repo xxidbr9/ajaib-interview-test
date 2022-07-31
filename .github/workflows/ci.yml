@@ -18,7 +18,5 @@ jobs:
         uses: ArtiomTr/jest-coverage-report-action@v2
         with:
           package-manager: yarn
-          test-script: yarn test --ci --json --coverage --testLocationInResults --outputFile=./coverage/report.json
+          test-script: yarn test --ci --json --coverage --testLocationInResults --outputFile=report.json
           skip-step: all
-          coverage-file: ./coverage/report.json
-          base-coverage-file: ./coverage/master/report.json
