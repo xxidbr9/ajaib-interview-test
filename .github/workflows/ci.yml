@@ -1,6 +1,11 @@
 # yaml-language-server: $schema=https://json-schema.org/draft-07/schema#
 name: Testing in Pull Request
-on: [pull_request]
+on:
+  pull_request:
+    branches:
+      - development
+      - master
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,8 +21,4 @@ jobs:
           yarn test --coverage
 
       - name: Comment Test Coverage 💬
-        uses: AthleticNet/comment-test-coverage@1.1
-        with:
-          token: ${{ secrets.ACCESS_TOKEN }}
-          path: coverage/coverage-final.json
-          title: Jest Test Coverage
+        uses: ArtiomTr/jest-coverage-report-action@v2
