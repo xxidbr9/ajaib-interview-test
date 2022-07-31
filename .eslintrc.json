@@ -4,6 +4,7 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
+  "ignorePatterns": ["**/webpack/webpack.*.ts"],
   "plugins": ["@typescript-eslint", "react-hooks", "react", "import"],
   "extends": [
     "plugin:react/recommended",
@@ -28,6 +29,12 @@
     "@typescript-eslint/ban-ts-ignore": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }],
     "import/prefer-default-export": "off",
+    "import/no-import-module-exports": [
+      "error",
+      {
+        "exceptions": ["**/webpack.*.ts"]
+      }
+    ],
     "import/no-extraneous-dependencies": [
       "error",
       {
