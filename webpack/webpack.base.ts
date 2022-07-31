@@ -71,7 +71,7 @@ const config: Configuration = {
       chunkFilename: '[id].[contenthash].css',
     }),
     new HtmlWebpackPlugin({
-      template: 'src/static/index.html',
+      template: 'public/index.html',
     }),
   ],
 };
