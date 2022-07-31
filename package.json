@@ -6,5 +6,9 @@
   "repository": "https://github.com/xxidbr9/ajaib-interview-test.git",
   "author": "Barnando Akbarto Hidayatullah <barnando13@gmail.com>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
 }
