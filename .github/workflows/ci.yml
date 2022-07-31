@@ -22,5 +22,5 @@ jobs:
         uses: ArtiomTr/jest-coverage-report-action@v2
         with:
           test-script: yarn test --ci --json --coverage --testLocationInResults --outputFile=./coverage/report.json
-          github-token: ${{ secrets.ACCESS_TOKEN }}
+          # github-token: ${{ secrets.ACCESS_TOKEN }}
           coverage-file: ./coverage/report.json
