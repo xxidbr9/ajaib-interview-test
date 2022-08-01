@@ -1,7 +1,7 @@
 import React from 'react';
-import type { HelloWorldProps } from './hello_world.props';
+import type { HelloWorldProps } from './hello-world.props';
 
-function HelloWorld(props: HelloWorldProps) {
+const HelloWorld = (props: HelloWorldProps) => {
   const { name } = props;
   return (
     <div>
@@ -9,6 +9,6 @@ function HelloWorld(props: HelloWorldProps) {
       {name}
     </div>
   );
-}
+};
 
 export default HelloWorld;

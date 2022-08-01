@@ -1,4 +1,5 @@
 import './assets/css/global.css';
+import './styles/antd.less';
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
@@ -9,7 +10,7 @@ const container = document.getElementById('magic');
 const root = createRoot(container!);
 // eslint-disable-next-line
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <App />,
+  // </React.StrictMode>
 );
