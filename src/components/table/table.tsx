@@ -46,11 +46,13 @@ const columns: ColumnsType<UserModel> = [
 
 const Table: React.FC = () => {
   const rdxUserData = useAppSelector(rdxUserSelector.getUsersList);
-  const loading = useAppSelector(rdxUserSelector.isUserListLoading);
+  const rdxLoading = useAppSelector(rdxUserSelector.isUserListLoading);
   const rdxPagination = useAppSelector(rdxUserSelector.getUserPaginationInfo);
   const rdxSort = useAppSelector(rdxUserSelector.getUserSorter);
+  const rdxUserFilter = useAppSelector(rdxUserSelector.getUserFilter);
 
   const dispatch = useAppDispatch();
+
   const handleChange: TableProps<UserModel>['onChange'] = async (
     pagination,
     _filters,
@@ -62,12 +64,13 @@ const Table: React.FC = () => {
     const isSorting = !!sort.column?.dataIndex;
     dispatch(
       rdxUserActions.setSorter({
-        ...(isSorting ? { sortBy: sort.field as string } : {}),
-        ...(sort.order ? { sortOrder: sort.order } : {}),
+        ...(isSorting && { sortBy: sort.field as string }),
+        ...(!!sort.order && { sortOrder: sort.order }),
       }),
     );
 
     const page = extra.action === 'sort' ? 1 : (pagination.current as number);
+
     dispatch(
       rdxUserActions.setPagination({
         page,
@@ -81,13 +84,18 @@ const Table: React.FC = () => {
   useEffect(() => {
     const isHaveSortBy = !!rdxSort.sortBy;
     const isHaveSortOrder = !!rdxSort.sortOrder;
+    const isSelectedGender = ['female', 'male'].includes(
+      rdxUserFilter.gender as string,
+    );
 
     const params: GetUserListNetworkParamsType = {
       page: rdxPagination?.page,
       results: rdxPagination?.pageSize,
       pageSize: rdxPagination?.pageSize, // for presentation purpose
-      ...(isHaveSortBy ? { sortBy: rdxSort?.sortBy } : {}),
-      ...(isHaveSortOrder ? { sortOrder: rdxSort?.sortOrder } : {}),
+      ...(isHaveSortBy && { sortBy: rdxSort?.sortBy }),
+      ...(isHaveSortOrder && { sortOrder: rdxSort?.sortOrder }),
+      ...(isSelectedGender && { gender: rdxUserFilter.gender }),
+      ...(!!rdxUserFilter.keyword && { keyword: rdxUserFilter.keyword }),
     };
 
     dispatch(rdxUserThunkActions.fetchUsersList(params));
@@ -96,6 +104,8 @@ const Table: React.FC = () => {
     rdxPagination?.pageSize,
     rdxSort?.sortBy,
     rdxSort?.sortOrder,
+    rdxUserFilter.gender,
+    rdxUserFilter.keyword,
     dispatch,
   ]);
 
@@ -104,7 +114,7 @@ const Table: React.FC = () => {
       columns={columns}
       dataSource={rdxUserData}
       onChange={handleChange}
-      loading={loading}
+      loading={rdxLoading}
       pagination={{
         current: rdxPagination?.page,
         total: rdxPagination?.total,

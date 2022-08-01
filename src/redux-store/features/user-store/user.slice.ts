@@ -15,6 +15,7 @@ type rdxUserInitialStateType = {
   filter: {
     gender?: GenderType;
     keyword?: string;
+    q?: string;
   };
   sorter: {
     sortBy?: string;
@@ -55,16 +56,25 @@ const userSlice = createSlice({
     setUserList(state, action: PayloadAction<UserRequestResultModel>) {
       state.userList = action.payload;
     },
-    setFilter(state, action: PayloadAction<rdxUserInitialStateType['filter']>) {
-      state.filter = action.payload;
-    },
     setSearchKeyword(state, action: PayloadAction<string>) {
-      state.filter = {
-        keyword: action.payload,
-      };
+      state.filter.keyword = action.payload;
+      state.userList.info.page = 1;
+    },
+    setSearchDebounce(state, action: PayloadAction<string>) {
+      state.filter.q = action.payload;
+      state.loading = true;
+    },
+    setGender(state, action: PayloadAction<string>) {
+      state.filter.gender = action.payload as GenderType;
+      state.userList.info.page = 1;
+    },
+    resetFilter(state) {
+      state.filter = initialState.filter;
+      state.userList.info.page = 1;
     },
     setSorter(state, action: PayloadAction<rdxUserInitialStateType['sorter']>) {
       state.sorter = action.payload;
+      state.userList.info.page = 1;
     },
     setPagination(state, action: PayloadAction<UserRequestInfoModel>) {
       state.userList = {
