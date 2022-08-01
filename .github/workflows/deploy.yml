@@ -11,9 +11,11 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
         with:
-          persist-credentials: false 
+          persist-credentials: false
 
       - name: Install and Build 🔧
+        env:
+          APP_BACKEND_URL: ${{ secrets.APP_BACKEND_URL }}
         run: |
           yarn
           yarn build
