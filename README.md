@@ -46,6 +46,13 @@ This is a project example of an user list that from [API](https://randomuser.me/
 - Redux
   - Redux saga
   - Redux Toolkit
+- Husky
+- Eslint
+- Jest
+- Commitlint
+- React Testing Library
+- Axios
+- [More](./package.json) 
 
 ## HOW TO RUN
 
