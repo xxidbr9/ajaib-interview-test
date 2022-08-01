@@ -11,7 +11,7 @@ const HomePage = () => (
     {/* Header end */}
 
     {/* section start */}
-    <section>
+    <section style={{ padding: '1rem 1.5rem' }}>
       <Breadcrumb>
         <Breadcrumb.Item>Home</Breadcrumb.Item>
         <Breadcrumb.Item>Example Page</Breadcrumb.Item>

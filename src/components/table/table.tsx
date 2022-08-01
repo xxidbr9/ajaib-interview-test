@@ -10,6 +10,7 @@ import { Table as AntdTable } from 'antd';
 import { SorterResult } from 'antd/lib/table/interface';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import { GetUserListNetworkParamsType } from '@api/user';
+import { format } from 'date-fns';
 
 const columns: ColumnsType<UserModel> = [
   {
@@ -41,6 +42,7 @@ const columns: ColumnsType<UserModel> = [
     dataIndex: 'registerDate',
     sorter: (a, b) => (a.registerDate < b.registerDate ? -1 : 1),
     width: '25%',
+    render: (value) => format(new Date(value), 'dd-MM-yyyy HH:mm'),
   },
 ];
 
