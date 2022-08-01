@@ -93,5 +93,5 @@ Take a look at the presentation [Google Slide](https://docs.google.com/presentat
 
 ## TODO
 
-- [x] Build the project using docker and inside NGINX
-- [x] Test all file
+- [ ] Build the project using docker and inside NGINX
+- [ ] Test all file
