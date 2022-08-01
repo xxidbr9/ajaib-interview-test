@@ -1,5 +1,7 @@
+import { store } from '@rdx/index';
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
+import { Provider } from 'react-redux';
 import Form from './form';
 
 describe('Test form component', () => {
@@ -20,7 +22,11 @@ describe('Test form component', () => {
   });
 
   beforeEach(() => {
-    render(<Form />);
+    render(
+      <Provider store={store}>
+        <Form />
+      </Provider>,
+    );
   });
   it('Test is component render', () => {
     screen.getByText('Search');

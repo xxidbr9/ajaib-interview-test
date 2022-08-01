@@ -6,7 +6,7 @@ class UserDTO {
 
   constructor(rawUser: UserResult) {
     this.user = {
-      id: rawUser.id.value,
+      id: rawUser.id.value as string,
       email: rawUser.email,
       fullname: [rawUser.name.first, rawUser.name.last].join(' '),
       gender: rawUser.gender as GenderType,

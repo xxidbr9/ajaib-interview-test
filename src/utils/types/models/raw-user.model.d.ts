@@ -39,19 +39,14 @@ export interface Login {
   sha256: string;
 }
 
-export interface Dob {
-  date: Date;
-  age: number;
-}
-
-export interface Registered {
-  date: Date;
+export interface DateValue {
+  date: Date | string;
   age: number;
 }
 
 export interface Id {
   name: string;
-  value: string;
+  value?: string | null;
 }
 
 export interface Picture {
@@ -66,8 +61,8 @@ export interface UserResult {
   location: Location;
   email: string;
   login: Login;
-  dob: Dob;
-  registered: Registered;
+  dob: DateValue;
+  registered: DateValue;
   phone: string;
   cell: string;
   id: Id;

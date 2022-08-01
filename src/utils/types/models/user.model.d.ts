@@ -6,7 +6,7 @@ export interface UserModel {
   fullname: string;
   gender: GenderType;
   email: string;
-  registerDate: Date;
+  registerDate: Date | string;
 }
 
 export interface UserRequestInfoModel {
