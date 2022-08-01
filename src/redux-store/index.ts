@@ -24,3 +24,5 @@ const initializeStore = () => {
 
 export const store = initializeStore();
 export type RootState = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;

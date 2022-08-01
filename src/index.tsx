@@ -10,7 +10,7 @@ const container = document.getElementById('magic');
 const root = createRoot(container!);
 // eslint-disable-next-line
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <App />,
+  // </React.StrictMode>
 );

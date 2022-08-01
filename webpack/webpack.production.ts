@@ -1,4 +1,3 @@
-/* eslint import/no-extraneous-dependencies: ["error", {"peerDependencies": true}] */
 import paths from './paths';
 import { merge } from 'webpack-merge';
 import baseConfig from './webpack.base';
@@ -9,12 +8,12 @@ import TerserPlugin from 'terser-webpack-plugin';
 import BrotliPlugin from 'brotli-webpack-plugin';
 
 // const Dotenv = require('dotenv-webpack');
-// import Dotenv from 'dotenv-webpack'
+import Dotenv from 'dotenv-webpack';
 import { WebpackPluginInstance } from 'webpack';
 
-// const envPlugin = new Dotenv({
-//   path: './.env.production',
-// })
+const envPlugin = new Dotenv({
+  path: './.env.production',
+});
 
 const brotliCompression = new BrotliPlugin({
   asset: '[path].br[query]',
@@ -32,7 +31,7 @@ module.exports = merge(baseConfig, {
     filename: 'js/[name].[contenthash].bundle.js',
   },
   plugins: [
-    // envPlugin as unknown as WebpackPluginInstance,
+    envPlugin as unknown as WebpackPluginInstance,
     new MiniCssExtractPlugin({
       filename: 'styles/[name].[contenthash].css',
       chunkFilename: '[id].css',

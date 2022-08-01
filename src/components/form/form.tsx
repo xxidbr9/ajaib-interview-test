@@ -59,7 +59,7 @@ const Form = () => {
                 <Button
                   size="large"
                   onClick={handleReset}
-                  data-test="reset-btn"
+                  data-testid="reset-btn"
                 >
                   Reset Filter
                 </Button>

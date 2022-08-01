@@ -1,65 +1,116 @@
+import React, { useEffect } from 'react';
+import { UserModel } from '@app-types/models/user.model';
+import {
+  rdxUserActions,
+  rdxUserSelector,
+  rdxUserThunkActions,
+} from '@rdx/features/user-store';
+import { useAppDispatch, useAppSelector } from '@utils/hooks';
 import { Table as AntdTable } from 'antd';
+import { SorterResult } from 'antd/lib/table/interface';
 import type { ColumnsType, TableProps } from 'antd/es/table';
-import React from 'react';
+import { GetUserListNetworkParamsType } from '@api/user';
 
-interface DataType {
-  key: React.Key;
-  username: string;
-  name: string;
-  email: string;
-  gender: string; // todo change gender to type gender
-  register_date: Date | number;
-}
-
-const columns: ColumnsType<DataType> = [
+const columns: ColumnsType<UserModel> = [
   {
     title: 'Username',
     dataIndex: 'username',
-    // sorter: (a, b) => a.name.length - b.name.length,
-    // sortDirections: ['descend'],
+    sorter: (a, b) => (a.username < b.username ? -1 : 1),
+    width: '20%',
   },
   {
     title: 'Name',
-    dataIndex: 'name',
-    // sorter: (a, b) => a.name.length - b.name.length,
-    // sortDirections: ['descend'],
+    dataIndex: 'fullname',
+    sorter: (a, b) => (a.fullname < b.fullname ? -1 : 1),
+    width: '20%',
   },
   {
     title: 'Email',
     dataIndex: 'email',
-    defaultSortOrder: 'descend',
+    sorter: (a, b) => (a.email < b.email ? -1 : 1),
+    width: '20%',
   },
   {
     title: 'Gender',
     dataIndex: 'gender',
+    sorter: (a, b) => (a.gender < b.gender ? -1 : 1),
+    width: '15%',
   },
   {
     title: 'Register Date',
-    dataIndex: 'register_date',
+    dataIndex: 'registerDate',
+    sorter: (a, b) => (a.registerDate < b.registerDate ? -1 : 1),
+    width: '25%',
   },
 ];
 
-const data: DataType[] = [
-  {
-    key: '1',
-    username: 'xxidbr9',
-    name: 'Barnando Akbarto Hidayatullah',
-    email: 'barnando13@gmail.com',
-    gender: 'male',
-    register_date: Date.now(),
-  },
-];
+const Table: React.FC = () => {
+  const rdxUserData = useAppSelector(rdxUserSelector.getUsersList);
+  const loading = useAppSelector(rdxUserSelector.isUserListLoading);
+  const rdxPagination = useAppSelector(rdxUserSelector.getUserPaginationInfo);
+  const rdxSort = useAppSelector(rdxUserSelector.getUserSorter);
 
-const onChange: TableProps<DataType>['onChange'] = (
-  pagination,
-  filters,
-  sorter,
-  extra,
-) => {
-  console.log('params', pagination, filters, sorter, extra);
+  const dispatch = useAppDispatch();
+  const handleChange: TableProps<UserModel>['onChange'] = async (
+    pagination,
+    _filters,
+    sorter,
+    extra,
+  ) => {
+    const sort = { ...sorter } as SorterResult<UserModel>;
+
+    const isSorting = !!sort.column?.dataIndex;
+    dispatch(
+      rdxUserActions.setSorter({
+        ...(isSorting ? { sortBy: sort.field as string } : {}),
+        ...(sort.order ? { sortOrder: sort.order } : {}),
+      }),
+    );
+
+    const page = extra.action === 'sort' ? 1 : (pagination.current as number);
+    dispatch(
+      rdxUserActions.setPagination({
+        page,
+        pageSize: pagination.pageSize as number,
+        total: pagination.total,
+      }),
+    );
+  };
+
+  // TODO : add url reader
+  useEffect(() => {
+    const isHaveSortBy = !!rdxSort.sortBy;
+    const isHaveSortOrder = !!rdxSort.sortOrder;
+
+    const params: GetUserListNetworkParamsType = {
+      page: rdxPagination?.page,
+      results: rdxPagination?.pageSize,
+      pageSize: rdxPagination?.pageSize, // for presentation purpose
+      ...(isHaveSortBy ? { sortBy: rdxSort?.sortBy } : {}),
+      ...(isHaveSortOrder ? { sortOrder: rdxSort?.sortOrder } : {}),
+    };
+
+    dispatch(rdxUserThunkActions.fetchUsersList(params));
+  }, [
+    rdxPagination?.page,
+    rdxPagination?.pageSize,
+    rdxSort?.sortBy,
+    rdxSort?.sortOrder,
+    dispatch,
+  ]);
+
+  return (
+    <AntdTable
+      columns={columns}
+      dataSource={rdxUserData}
+      onChange={handleChange}
+      loading={loading}
+      pagination={{
+        current: rdxPagination?.page,
+        total: rdxPagination?.total,
+        pageSize: rdxPagination?.pageSize,
+      }}
+    />
+  );
 };
-
-const Table: React.FC = () => (
-  <AntdTable columns={columns} dataSource={data} onChange={onChange} />
-);
 export default Table;
