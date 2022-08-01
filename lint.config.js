@@ -3,5 +3,5 @@ module.exports = {
     'eslint --fix --ignore-pattern="src/**/*.d.ts"',
     () => 'tsc --skipLibCheck --noEmit',
   ],
-  '*.{js,jsx,ts,tsx,json,css,js}': ['prettier src -c --write'],
+  '*.{json,css}': ['prettier src -c --write'],
 };

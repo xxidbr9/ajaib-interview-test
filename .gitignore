@@ -8,7 +8,7 @@ package-lock.json
 .vscode
 
 # ENV
-# .env.development
+.env.development
 .env.production
 
 coverage

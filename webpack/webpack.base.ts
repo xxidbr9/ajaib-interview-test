@@ -1,10 +1,10 @@
-import paths from './paths';
 import { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import paths from './paths';
 
 interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
@@ -33,7 +33,15 @@ const config: Configuration = {
           // compiles Less to CSS
           'style-loader',
           'css-loader',
-          'less-loader',
+          {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                // antd less options config
+                javascriptEnabled: true,
+              },
+            },
+          },
         ],
       },
       {
@@ -58,7 +66,7 @@ const config: Configuration = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: paths.src + '/assets',
+          from: `${paths.src}/assets`,
           to: 'assets',
           globOptions: {
             ignore: ['*.DS_Store'],
