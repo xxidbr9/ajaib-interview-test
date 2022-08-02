@@ -72,10 +72,10 @@ yarn build
 
 #### Serve the project in Production (using serve)
 ```bash
-yarn build
+yarn serve
 ```
 
-#### TODO :Serve the project in Production (using Docker)
+#### TODO : Serve the project in Production (using Docker Compose)
 ```bash
 docker-compose up
 ```
@@ -94,7 +94,8 @@ Take a look at the presentation [Google Slide](https://docs.google.com/presentat
 
 - This project use Webpack v5, it will be easily expose and consume a module federation for Micro-frontend
 - Brotli for compression, can reduce 60% bundle size when serve it to user, use with [ngx_brotli](https://github.com/google/ngx_brotli) and serve in NGINX, reduce 60% assets size
-- Github action for CICD
+- Github action for CICD [action file](./.github/workflows)
+- Test all Development PR [see example](https://github.com/xxidbr9/ajaib-interview-test/pull/14)
 - Great Web performance (base on lighthouse)
   <img src="./.github/images/lighthouse.png">
 
